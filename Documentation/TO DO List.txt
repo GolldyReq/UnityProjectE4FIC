@@ -1,0 +1,35 @@
+Tourelles :
+	-Leur ajouter des pv
+	-Les rendre attaquables
+	-Les faire attaquer
+	-Empecher le joueur et les creeps de passer au travers
+	-D'abord attaquer les creeps puis le player
+	
+Creeps:
+	-Faire spawner les creeps
+	-Les faire avancer jusqu'a la tourelle ennemi
+	-Les faire se battre à la rencontre de sbire ennemis
+	-Les faire se battre à la rencontre du champion ennemi
+	-Pathfinding jusqu'au tourelle (nav mesh)
+	
+Map :
+	-Tiles aléatoire
+	-Ajout de pièges
+	-Mur
+	-Décor
+
+Player:
+	-Ajout pathfinding player (nav Mesh)
+	-Ajout items / Boutique
+	-Ajout niveau / XP
+
+Champion ennemi:
+	-Réseau de neurones
+
+Interface :
+	-Ajout icone perso
+	-ajout cooldown visuel sur les sorts
+	-Afficher la descriptions des actions lorsqu'on met la souris sur une actions
+	-Barre d'xp / argent
+	-Inventaire pour voir items
+	

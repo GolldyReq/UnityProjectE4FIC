@@ -1,0 +1,4 @@
+Ninja :
+	-Modele 3D : https://assetstore.unity.com/packages/3d/characters/humanoids/lowpoly-ninja-157942
+	-Boule de feu :(https://skfb.ly/6BuHv) by KidpaddleetcieGlin is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+	-Shuriken : https://www.turbosquid.com/3d-models/free-shuriken-v1-3d-model/949792

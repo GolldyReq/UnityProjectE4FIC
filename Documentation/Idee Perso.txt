@@ -1,0 +1,7 @@
+Psycho (de Borderlands):
+	-A: lancer de buzz Axe (comme le A de Dr.Mundo)
+	-Z : Buff de stat
+	-E : roulade (dash)
+	-R : Suicide qui laisse à 1pv mais fait enormément de dégats
+	-Passif : a chaque coup recu +1% d'att jusqu'a 70%
+	-auto : basique au CaC

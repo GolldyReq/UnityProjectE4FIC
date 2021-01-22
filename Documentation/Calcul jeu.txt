@@ -1,0 +1,20 @@
+Calcul des degats :
+
+
+
+Calcul de la reduction de degats:
+
+
+
+Calcul des boosts :
+
+
+
+Calcul de l'argent :
+
+
+
+
+
+Calcul des effets d'item :
+

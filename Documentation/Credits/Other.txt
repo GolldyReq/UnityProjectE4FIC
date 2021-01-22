@@ -1,0 +1,5 @@
+Lighning bolt : https://assetstore.unity.com/packages/tools/particles-effects/lightning-bolt-effect-for-unity-59471
+
+Quick Outline : https://assetstore.unity.com/packages/tools/particles-effects/quick-outline-115488
+
+NavMesh : https://github.com/Unity-Technologies/NavMeshComponents
