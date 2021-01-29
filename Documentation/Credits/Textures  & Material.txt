@@ -7,4 +7,10 @@ Textures:
 
 
 Material:
+	-Stylized PBR texture pack : https://assetstore.unity.com/packages/2d/textures-materials/free-stylized-pbr-textures-pack-111778
 
+
+
+Particules & Effets :
+	-Cartoon FX Free : https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-free-109565
+	-Unity Particle Pack : https://assetstore.unity.com/packages/essentials/tutorial-projects/unity-particle-pack-127325

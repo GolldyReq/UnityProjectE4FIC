@@ -1,0 +1,22 @@
+Machine Learning / Réseau de neurones :
+	
+
+
+
+
+Génération Procédurale : 
+
+
+
+
+NavMesh :
+	-https://docs.unity3d.com/Manual/class-NavMeshSurface.html
+	-https://www.youtube.com/watch?v=B3o_9JS6fOc
+	-https://docs.unity3d.com/Manual/class-NavMeshModifier.html
+	-http://www.unity3d-france.com/unity/assets/E3D_Tuto_Unity_NavMeshSurface.pdf
+	-https://www.esprit-unity.fr/navmesh-environnements-complexes/
+	-https://www.youtube.com/watch?v=ncNZENaArPc
+
+Découpe de mesh : 
+
+

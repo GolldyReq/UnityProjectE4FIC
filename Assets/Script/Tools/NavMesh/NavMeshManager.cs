@@ -12,8 +12,11 @@ public class NavMeshManager : MonoBehaviour
     void Start()
     {
         m_navMeshSurface = GetComponent<NavMeshSurface>();
-        if (m_navMeshSurface!=null)
+        if (m_navMeshSurface != null)
+        {
             Debug.Log("NavMeshSurface init  : [OK] ");
+            m_navMeshSurface.BuildNavMesh();
+        }
         else
             Debug.Log("NavMeshSurface int : [ERREUR]");
         m_CanCompute = true;
@@ -32,6 +35,7 @@ public class NavMeshManager : MonoBehaviour
             StartCoroutine(StartCoolDownComputeNavMesh());
         }
         */
+        
     }
 
     protected IEnumerator StartCoolDownComputeNavMesh()

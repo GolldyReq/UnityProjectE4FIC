@@ -1,0 +1,4 @@
+-git pull
+-git add Assets Documentation
+-git commit -m "inserer un message"
+-git push

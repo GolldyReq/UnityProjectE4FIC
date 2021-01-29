@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
         m_IsReady = true;
         //Debug.Log("Game Manager : OK !");
 
+        
+
     }
 
 

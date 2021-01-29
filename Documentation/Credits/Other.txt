@@ -3,3 +3,5 @@ Lighning bolt : https://assetstore.unity.com/packages/tools/particles-effects/li
 Quick Outline : https://assetstore.unity.com/packages/tools/particles-effects/quick-outline-115488
 
 NavMesh : https://github.com/Unity-Technologies/NavMeshComponents
+
+Terrain tools sample assets pack : https://assetstore.unity.com/packages/2d/textures-materials/nature/terrain-tools-sample-asset-pack-145808

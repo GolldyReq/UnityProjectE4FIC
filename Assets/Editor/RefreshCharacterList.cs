@@ -11,6 +11,7 @@ public class RefreshCharacterList : MonoBehaviour
     [MenuItem("Tools/Update Character List")]
     public static void UpdateCharacterList()
     {
+        Debug.Log(Application.persistentDataPath);
         string file = Application.persistentDataPath + "/Characters/CharactersList.txt";
         string[] dir = Directory.GetDirectories("Assets/Resources/Characters", "*", SearchOption.TopDirectoryOnly);
         FileStream vidage = File.Open(file, FileMode.Truncate);

@@ -33,10 +33,16 @@ public class CreateMap : MonoBehaviour
                 tile.transform.parent = Map.transform;
                 tile.transform.position = new Vector3(i*10 , 0, j*10);
                 tile.name = i.ToString() +"_"+ j.ToString();
+                /*
                 //tile.AddComponent<NavMeshModifier>();
                 NavMeshModifier modifier = tile.GetComponent<NavMeshModifier>();
-                if(modifier)
-                    modifier.area = 03; //Ground                
+                if (modifier)
+                {
+                    Debug.Log("Attribution du layer");
+                    modifier.overrideArea = true;
+                    modifier.area = 04; //Ground   *
+                }
+                */
 
 
             }
