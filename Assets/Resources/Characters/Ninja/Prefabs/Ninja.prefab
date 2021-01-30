@@ -59,7 +59,8 @@ MonoBehaviour:
   HideHealthBar: 0
   m_shuriken: {fileID: 2545929330904288254, guid: 8b6b1c380ff8a8e42818e1bc215d7a64,
     type: 3}
-  m_fireball: {fileID: 0}
+  m_fireball: {fileID: 2025746410525920407, guid: 0e989906c1cd8ca4face70fe2a8059d9,
+    type: 3}
 --- !u!1 &3703634463097710608
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,15 +6,15 @@ public class Ninja : Character
 {
     //Personnage ninja, rapide , faible degats mais grande resistance 
     //A : lancer de shurikan 
-    //Z : Buff de speed 
-    //E : Boule de feu 
+    //Z : Double la vitesse pendant 1seconde
+    //E : Boule de feu (25% de chance d'enflammer la cible)
     //R : Téléportation
 
 
     [SerializeField] GameObject m_shuriken;
     [SerializeField] GameObject m_fireball;
 
-    public Ninja() : base("Ninja", 150, 120, 9f)
+    public Ninja() : base("Ninja", 150, 500, 9f)
     {
        
     }
@@ -32,8 +32,8 @@ public class Ninja : Character
         #region Init Action
         //Initialisation des actions
         Action Auto,A,Z,E,R;
-        Auto = null;
-        A = new Action("Shuriken", 50, 20, 20, 5f, "Envoie d'un shuriken ! ", 1f, Action.TYPE_OF_ACTION.dammage, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.projectile);
+        Auto = new Action("coup de pied", 15, 0, 10, .5f, "Vous infligez un coup de pied.", 1f);
+        A = new Action("Shuriken", 25, 10, 25, 3f, "Envoie d'un shuriken ! ", 1f, Action.TYPE_OF_ACTION.dammage, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.projectile);
         //Load A projectile Assets
         A.setProjectilePath("Characters/Ninja/Action/Shuriken/Shuriken");
         A.setProjectileSpeed(20);
@@ -42,8 +42,10 @@ public class Ninja : Character
         A.setProjectile(m_shuriken);
 
         Z = new Action("Shadow Speed" , 25, 15, 0f, 6f, "Augmente votre vitesse de déplacement" , .1f, Action.TYPE_OF_ACTION.speed_up, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.self);
-        
-        E = new Action("Fireball", 50, 20, 20, 5f, "Envoie d'une boule de feu ! ", 1f, Action.TYPE_OF_ACTION.dammage, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.projectile);
+        Z.setDuree(1);
+
+        string Edesc = "Envoie d'une boule de feu ! 25% de chance d'enflammer la cible pendant 10 secondes ";
+        E = new Action("Fireball", 30, 20, 20, .5f /*12f*/, Edesc, 1f, Action.TYPE_OF_ACTION.dammage, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.projectile);
         //Load A projectile Assets
         E.setProjectilePath("Characters/Ninja/Action/Fireball/Fireball");
         E.setProjectileSpeed(20);
@@ -51,9 +53,10 @@ public class Ninja : Character
         E.setStartHeightPos(transform.position.y + 5f);
         E.setProjectile(m_fireball);
         E.setReorientation(true);
+        E.setProjectileEffect(Action.ACTION_EFFECT.ignite, 99 /* 25*/, 5, 5) ;
 
 
-        R = null;
+        R = new Action("Teleportation", 0, 100, 50, 75f, "Le ninja disparaît et réapparaît aussitôt comme s'il s'était téléporté ! ", .1f, Action.TYPE_OF_ACTION.dash, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.self); 
         #endregion
         InitialisationAction(Auto, A, Z, E, R);
 
@@ -79,35 +82,55 @@ public class Ninja : Character
             if (Physics.Raycast(ray, out hit))
             {
                 Vector3 destination = hit.point;
+                Character cible = hit.collider.gameObject.GetComponent<Character>();
                 if (hit.collider.gameObject.GetComponent<Character>() != null)
                     destination = hit.collider.gameObject.transform.position;
+                //Auto attaque
+                if (Vector3.Distance(this.transform.position, destination) <= this.getAutoAction().getRange() && cible != null && cible != this)
+                {
+                    //lancement de l'auto attaque
+                    Attack(cible, this.getAutoAction());
+                    AttackAnimation(this.getAutoAction(), this.m_animator, "Auto");
+                }
+                // A competence
                 if (A && Vector3.Distance(this.transform.position, destination) < this.getAAction().getRange())
                 {
                     LaunchA(destination);
                 }
+                // E competence
                 if (E && Vector3.Distance(this.transform.position, destination) < this.getEAction().getRange())
                 {
                     LaunchE(destination);
+                }
+                //R competence
+                if( R && Vector3.Distance(this.transform.position , destination) < this.getRAction().getRange() && hit.collider.gameObject.tag == "Ground")
+                {
+                    LaunchR(destination);
                 }
             }
         }
 
 
         //Lecture des inputs
-        if (Input.GetButton("A") && !A && this.IsControllable && this.getAAction().getCost() <= this.getPm() && !cdA)
+        if (Input.GetButton("A") && !A && this.IsControllable && this.getAAction().getCost() <= this.getPm() && !cdA && TimeA<=0)
         {
             A = true;
             ShowActionRange(this.getAAction());
         }
-        if (Input.GetButton("Z") && !Z && this.IsControllable && this.getZAction().getCost() <= this.getPm() && !cdZ)
+        if (Input.GetButton("Z") && !Z && this.IsControllable && this.getZAction().getCost() <= this.getPm() && !cdZ && TimeZ <= 0)
         {
             Z = true;
             LaunchZ();
         }
-        if (Input.GetButton("E") && !E && this.IsControllable && this.getEAction().getCost() <= this.getPm() && !cdE)
+        if (Input.GetButton("E") && !E && this.IsControllable && this.getEAction().getCost() <= this.getPm() && !cdE && TimeE <= 0)
         {
             E = true;
             ShowActionRange(this.getEAction());
+        }
+        if (Input.GetButton("R") && !R && this.IsControllable && this.getRAction().getCost() <= this.getPm() && !cdR && TimeR <= 0)
+        {   
+            R = true;
+            ShowActionRange(this.getRAction());
         }
     }
 
@@ -122,7 +145,12 @@ public class Ninja : Character
     }
     public void LaunchZ()
     {
-
+        //Debug.Log("Launch Z");
+        StartCoroutine(StartCoolDownZ());
+        this.setPm(this.getPm() - this.getZAction().getCost());
+        //SpeedUp
+        //Debug.Log("Augmentation de + " + ((float)this.getZAction().getDammage() / 100) + "%");
+        StartCoroutine(ZSelfBuff());
     }
     public void LaunchE(Vector3 destination)
     {
@@ -134,6 +162,20 @@ public class Ninja : Character
     }
     public void LaunchR(Vector3 destination)
     {
+        StartCoroutine(StartCoolDownR());
+        this.setPm(this.getPm() - this.getRAction().getCost());
+        transform.LookAt(destination);
+        this.m_newPosition = destination;
+        this.transform .position = destination;
+        DeleteActionRange();
+
+    }
+
+    IEnumerator ZSelfBuff()
+    {
+        this.setSpeed(this.getSpeed() * 2);
+        yield return new WaitForSeconds(this.getZAction().getDuree());
+        this.setSpeed(this.getSpeed() / 2);
 
     }
 

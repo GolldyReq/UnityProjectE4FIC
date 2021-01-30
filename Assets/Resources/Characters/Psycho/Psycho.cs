@@ -50,7 +50,7 @@ public class Psycho : Character
         A.setStartHeightPos(transform.position.y + 5f);
         A.setProjectile(a_BuzzAxe);
 
-        Action Z = new Action("Délire psychodélique", 25, 25, 0f, 5f, "Vous entrez dans une rage qui vous fait oubliez la douleur, vous regagnez 20% de votre santé max et augmenter votre vitesse de 25% pour 5secondes", .1f, Action.TYPE_OF_ACTION.speed_up, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.self);
+        Action Z = new Action("Délire psychodélique", 25, 25, 0f, 15f, "Vous entrez dans une rage qui vous fait oubliez la douleur, vous regagnez 20% de votre santé max et augmenter votre vitesse de 25% pour 5secondes", .1f, Action.TYPE_OF_ACTION.speed_up, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.self);
         Z.setDuree(5);
 
         Action E = new Action("Roulade", 0, 10, 15f, 5f, "Vous effectuez une roulade.", 1f, Action.TYPE_OF_ACTION.dash, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.dash);
@@ -135,17 +135,17 @@ public class Psycho : Character
             }
         }
         //Lecture des inputs
-        if (Input.GetButton("A") && !A && this.IsControllable && this.getAAction().getCost()<= this.getPm() && !cdA)
+        if (Input.GetButton("A") && !A && this.IsControllable && this.getAAction().getCost()<= this.getPm() && !cdA && TimeA <= 0)
         {
             A = true;
             ShowActionRange(this.getAAction());
         }
-        if (Input.GetButton("Z") && !Z && this.IsControllable && this.getZAction().getCost() <= this.getPm() && !cdZ)
+        if (Input.GetButton("Z") && !Z && this.IsControllable && this.getZAction().getCost() <= this.getPm() && !cdZ && TimeZ <= 0)
         {
             Z = true;
             LaunchZ();
         }
-        if (Input.GetButton("E") && !E && this.IsControllable && this.getEAction().getCost() <= this.getPm() && !cdE)
+        if (Input.GetButton("E") && !E && this.IsControllable && this.getEAction().getCost() <= this.getPm() && !cdE && TimeE <= 0)
         {
             E = true;
             ShowActionRange(this.getEAction());

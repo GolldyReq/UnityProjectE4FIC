@@ -28,7 +28,7 @@ public class PlayerStatTool : MonoBehaviour
 
     }
 
-    public static void UpdateManaAndHealth(int pv, int pvmax , int pm , int pmmax)
+    public static void UpdateManaAndHealth(int pv, int pvmax, int pm, int pmmax)
     {
         try
         {
@@ -46,6 +46,7 @@ public class PlayerStatTool : MonoBehaviour
 
     }
 
+
     public static void UpdatePlayerStat()
     {
         try
@@ -56,6 +57,35 @@ public class PlayerStatTool : MonoBehaviour
 
     }
 
+    public static void UpdateCoolDownPlayer(float tA , float tZ ,float tE , float tR)
+    {
+        try
+        {
+            GameObject Apannel = GameObject.Find("A");
+            GameObject Zpannel = GameObject.Find("Z");
+            GameObject Epannel = GameObject.Find("E");
+            GameObject Rpannel = GameObject.Find("R");
+            if(tA > 0)
+                Apannel.transform.GetChild(2).gameObject.GetComponentInChildren<Text>().text = tA.ToString("0.0");
+            else
+                Apannel.transform.GetChild(2).gameObject.GetComponentInChildren<Text>().text = "";
+            if (tZ > 0)
+                Zpannel.transform.GetChild(2).gameObject.GetComponentInChildren<Text>().text = tZ.ToString("0.0");
+            else
+                Zpannel.transform.GetChild(2).gameObject.GetComponentInChildren<Text>().text = "";
+            if (tE > 0)
+                Epannel.transform.GetChild(2).gameObject.GetComponentInChildren<Text>().text = tE.ToString("0.0");
+            else
+                Epannel.transform.GetChild(2).gameObject.GetComponentInChildren<Text>().text = "";
+            if (tR > 0)
+                Rpannel.transform.GetChild(2).gameObject.GetComponentInChildren<Text>().text = tR.ToString("0.0");
+            else
+                Rpannel.transform.GetChild(2).gameObject.GetComponentInChildren<Text>().text = "";
+
+
+        }
+        catch(Exception e) { }
+    }
 
     public static void UpdatePlayerItem()
     {
