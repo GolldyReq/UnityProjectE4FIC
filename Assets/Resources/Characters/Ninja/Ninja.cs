@@ -32,7 +32,7 @@ public class Ninja : Character
         #region Init Action
         //Initialisation des actions
         Action Auto,A,Z,E,R;
-        Auto = new Action("coup de pied", 15, 0, 10, .5f, "Vous infligez un coup de pied.", 1f);
+        Auto = new Action("coup de pied", 15, 0, 10, .5f, "Vous infligez un coup de pied.", .7f);
         A = new Action("Shuriken", 25, 10, 25, 3f, "Envoie d'un shuriken ! ", 1f, Action.TYPE_OF_ACTION.dammage, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.projectile);
         //Load A projectile Assets
         A.setProjectilePath("Characters/Ninja/Action/Shuriken/Shuriken");
@@ -40,6 +40,7 @@ public class Ninja : Character
         A.setProjectileRotation(true);
         A.setStartHeightPos(transform.position.y + 5f);
         A.setProjectile(m_shuriken);
+        A.setVisualEffect("Characters/Ninja/Action/Shuriken/OnHitEffect");
 
         Z = new Action("Shadow Speed" , 25, 15, 0f, 6f, "Augmente votre vitesse de déplacement" , .1f, Action.TYPE_OF_ACTION.speed_up, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.self);
         Z.setDuree(1);
@@ -53,7 +54,7 @@ public class Ninja : Character
         E.setStartHeightPos(transform.position.y + 5f);
         E.setProjectile(m_fireball);
         E.setReorientation(true);
-        E.setProjectileEffect(Action.ACTION_EFFECT.ignite, 99 /* 25*/, 5, 5) ;
+        E.setProjectileEffect(Action.ACTION_EFFECT.ignite, 25, 5, 5) ;
 
 
         R = new Action("Teleportation", 0, 100, 50, 75f, "Le ninja disparaît et réapparaît aussitôt comme s'il s'était téléporté ! ", .1f, Action.TYPE_OF_ACTION.dash, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.self); 
@@ -109,7 +110,8 @@ public class Ninja : Character
                 }
             }
         }
-
+        //test
+        transform.GetChild(0).gameObject.transform.localPosition = new Vector3(0, 0, 0);
 
         //Lecture des inputs
         if (Input.GetButton("A") && !A && this.IsControllable && this.getAAction().getCost() <= this.getPm() && !cdA && TimeA<=0)
