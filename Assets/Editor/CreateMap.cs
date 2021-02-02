@@ -26,7 +26,7 @@ public class CreateMap : MonoBehaviour
         //Construction Map
         for (int i =0; i <5; i++)
         {
-            for (int j = 0; j< 20; j++)
+            for (int j = 0; j< 15; j++)
             {
                 //A modifier pour chercher des tiles random
                 GameObject tile = Instantiate(Resources.Load("Map/Tile/BasicTile")) as GameObject; 

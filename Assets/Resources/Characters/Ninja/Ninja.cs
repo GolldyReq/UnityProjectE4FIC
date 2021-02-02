@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,7 +47,7 @@ public class Ninja : Character
         Z.setDuree(1);
 
         string Edesc = "Envoie d'une boule de feu ! 25% de chance d'enflammer la cible pendant 10 secondes ";
-        E = new Action("Fireball", 30, 20, 20, .5f /*12f*/, Edesc, 1f, Action.TYPE_OF_ACTION.dammage, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.projectile);
+        E = new Action("Fireball", 30, 20, 20, 12f, Edesc, 1f, Action.TYPE_OF_ACTION.dammage, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.projectile);
         //Load A projectile Assets
         E.setProjectilePath("Characters/Ninja/Action/Fireball/Fireball");
         E.setProjectileSpeed(20);
@@ -54,7 +55,7 @@ public class Ninja : Character
         E.setStartHeightPos(transform.position.y + 5f);
         E.setProjectile(m_fireball);
         E.setReorientation(true);
-        E.setProjectileEffect(Action.ACTION_EFFECT.ignite, 25, 5, 5) ;
+        E.setProjectileEffect(Action.ACTION_EFFECT.ignite, 75, 5, 15) ;
 
 
         R = new Action("Teleportation", 0, 100, 50, 75f, "Le ninja disparaît et réapparaît aussitôt comme s'il s'était téléporté ! ", .1f, Action.TYPE_OF_ACTION.dash, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.self); 
@@ -169,6 +170,13 @@ public class Ninja : Character
         transform.LookAt(destination);
         this.m_newPosition = destination;
         this.transform .position = destination;
+        if(nav !=null)
+        {
+            try
+            {
+                nav.SetDestination(destination);
+            }catch(Exception e) { }
+        }
         DeleteActionRange();
 
     }

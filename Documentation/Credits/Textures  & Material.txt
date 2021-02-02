@@ -2,7 +2,9 @@ GUI :
 	-Divers icone et gui trouvé sur l'unity assets store (nous avons picohé dans plusieurs d'entre eux)
 
 Textures: 
-
+	-https://opengameart.org/content/cobble-path-texture
+	-https://opengameart.org/content/hand-painted-stone-path-texture
+	-https://opengameart.org/content/stylized-sandy-stone-path
 
 
 
@@ -14,3 +16,8 @@ Material:
 Particules & Effets :
 	-Cartoon FX Free : https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-free-109565
 	-Unity Particle Pack : https://assetstore.unity.com/packages/essentials/tutorial-projects/unity-particle-pack-127325
+
+
+
+
+https://opengameart.org/
