@@ -1,1 +1,4 @@
-Tourelle : https://assetstore.unity.com/packages/3d/environments/fantasy/awesome-stylized-mage-tower-53793
+Tour : https://assetstore.unity.com/packages/3d/environments/fantasy/awesome-stylized-mage-tower-53793
+Generateur de sbire :https://free3d.com/fr/3d-model/teleportation-room-v2--331611.html
+Sbire CaC : https://assetstore.unity.com/packages/p/mini-legion-footman-pbr-hp-polyart-86576
+Sbire Range : https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/mini-legion-lich-pbr-hp-polyart-91497

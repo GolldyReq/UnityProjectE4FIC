@@ -33,13 +33,13 @@ public class Ninja : Character
         #region Init Action
         //Initialisation des actions
         Action Auto,A,Z,E,R;
-        Auto = new Action("coup de pied", 15, 0, 10, .5f, "Vous infligez un coup de pied.", .7f);
+        Auto = new Action("coup de pied", 15, 0, 5, .5f, "Vous infligez un coup de pied.", .7f);
         A = new Action("Shuriken", 25, 10, 25, 3f, "Envoie d'un shuriken ! ", 1f, Action.TYPE_OF_ACTION.dammage, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.projectile);
         //Load A projectile Assets
         A.setProjectilePath("Characters/Ninja/Action/Shuriken/Shuriken");
         A.setProjectileSpeed(20);
         A.setProjectileRotation(true);
-        A.setStartHeightPos(transform.position.y + 5f);
+        A.setStartHeightPos(5f);
         A.setProjectile(m_shuriken);
         A.setVisualEffect("Characters/Ninja/Action/Shuriken/OnHitEffect");
 
@@ -83,6 +83,7 @@ public class Ninja : Character
                 ray = this.m_camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
+                Debug.Log(hit.collider.gameObject.name);
                 Vector3 destination = hit.point;
                 Character cible = hit.collider.gameObject.GetComponent<Character>();
                 if (hit.collider.gameObject.GetComponent<Character>() != null)
@@ -93,6 +94,8 @@ public class Ninja : Character
                     //lancement de l'auto attaque
                     Attack(cible, this.getAutoAction());
                     AttackAnimation(this.getAutoAction(), this.m_animator, "Auto");
+                    if (nav != null)
+                        nav.SetDestination(transform.position); 
                 }
                 // A competence
                 if (A && Vector3.Distance(this.transform.position, destination) < this.getAAction().getRange())
