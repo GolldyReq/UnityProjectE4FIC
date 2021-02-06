@@ -21,9 +21,9 @@ public class Ninja : Character
     }
 
 
-    void Start()
+    new void Start()
     {
-
+        base.Start();
         this.InitialisationStat(0, 0, 0, 0); //Init base statistiques
         this.InitialisationRegen(1, 2); //Init pv and pm regen
         this.InitialisationDeplacement(); //Init movement
@@ -83,7 +83,7 @@ public class Ninja : Character
                 ray = this.m_camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log(hit.collider.gameObject.name);
+                //Debug.Log(hit.collider.gameObject.name);
                 Vector3 destination = hit.point;
                 Character cible = hit.collider.gameObject.GetComponent<Character>();
                 if (hit.collider.gameObject.GetComponent<Character>() != null)

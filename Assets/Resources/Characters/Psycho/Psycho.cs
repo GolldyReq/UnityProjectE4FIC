@@ -31,8 +31,9 @@ public class Psycho : Character
     {
     }
 
-    public void Start()
+    new public void Start()
     {
+        base.Start();
         this.InitialisationStat(0, 0, 0, 0); //Init base statistiques
         this.InitialisationRegen(1, 2); //Init pv and pm regen
         this.InitialisationDeplacement(); //Init movement
