@@ -15,10 +15,12 @@ public class CameraTest : MonoBehaviour
     void Update()
     {
 
-        Vector3 PlayerPos = m_player.transform.position;
-
-        this.transform.position = new Vector3(PlayerPos.x, PlayerPos.y + 45, PlayerPos.z - 15);
-        transform.LookAt(m_player.transform);
+        if (m_player != null)
+        {
+            Vector3 PlayerPos = m_player.transform.position;
+            this.transform.position = new Vector3(PlayerPos.x, PlayerPos.y + 45, PlayerPos.z - 15);
+            transform.LookAt(m_player.transform);
+        }
     }
 
 

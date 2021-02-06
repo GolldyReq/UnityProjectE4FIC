@@ -33,7 +33,7 @@ public class Ninja : Character
         #region Init Action
         //Initialisation des actions
         Action Auto,A,Z,E,R;
-        Auto = new Action("coup de pied", 15, 0, 5, .5f, "Vous infligez un coup de pied.", .7f);
+        Auto = new Action("coup de pied", 15, 0, 5, 1f, "Vous infligez un coup de pied.", .7f);
         A = new Action("Shuriken", 25, 10, 25, 3f, "Envoie d'un shuriken ! ", 1f, Action.TYPE_OF_ACTION.dammage, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.projectile);
         //Load A projectile Assets
         A.setProjectilePath("Characters/Ninja/Action/Shuriken/Shuriken");
@@ -89,13 +89,16 @@ public class Ninja : Character
                 if (hit.collider.gameObject.GetComponent<Character>() != null)
                     destination = hit.collider.gameObject.transform.position;
                 //Auto attaque
-                if (Vector3.Distance(this.transform.position, destination) <= this.getAutoAction().getRange() && cible != null && cible != this)
+                if (Vector3.Distance(this.transform.position, destination) <= this.getAutoAction().getRange() && cible != null && cible != this && !cdAuto && TimeAuto <= 0)
                 {
                     //lancement de l'auto attaque
+                    LaunchAuto(cible);
+                    /*
                     Attack(cible, this.getAutoAction());
                     AttackAnimation(this.getAutoAction(), this.m_animator, "Auto");
                     if (nav != null)
                         nav.SetDestination(transform.position); 
+                    */
                 }
                 // A competence
                 if (A && Vector3.Distance(this.transform.position, destination) < this.getAAction().getRange())
@@ -120,6 +123,7 @@ public class Ninja : Character
         //Lecture des inputs
         if (Input.GetButton("A") && !A && this.IsControllable && this.getAAction().getCost() <= this.getPm() && !cdA && TimeA<=0)
         {
+            DeleteActionRange();
             A = true;
             ShowActionRange(this.getAAction());
         }
@@ -130,16 +134,26 @@ public class Ninja : Character
         }
         if (Input.GetButton("E") && !E && this.IsControllable && this.getEAction().getCost() <= this.getPm() && !cdE && TimeE <= 0)
         {
+            DeleteActionRange();
             E = true;
             ShowActionRange(this.getEAction());
         }
         if (Input.GetButton("R") && !R && this.IsControllable && this.getRAction().getCost() <= this.getPm() && !cdR && TimeR <= 0)
-        {   
+        {
+            DeleteActionRange();
             R = true;
             ShowActionRange(this.getRAction());
         }
     }
 
+    public void LaunchAuto(Character cible)
+    {
+        StartCoroutine(StartCoolDownAuto());
+        Attack(cible, this.getAutoAction());
+        AttackAnimation(this.getAutoAction(), this.m_animator, "Auto");
+        if (nav != null)
+            nav.SetDestination(transform.position);
+    }
 
     public void LaunchA(Vector3 destination)
     {
