@@ -1,0 +1,1 @@
+-Les creeps finissent leurs animations d'attaques même lorsqu'ils sont morts , il faut stopper l'animation avant sa fin et déclencher celle de la mort.

@@ -41,7 +41,7 @@ public class Psycho : Character
 
         #region Action init
         //Chargement des actions
-        Action AutoAttaque = new Action("coup de buzz axe", 35, 0, 10, .5f, "Vous infligez un coup avec votre buzz axe.", .7f);
+        Action AutoAttaque = new Action("coup de buzz axe", 35, 0, 10, 1.5f, "Vous infligez un coup avec votre buzz axe.", .7f);
 
         Action A = new Action("Lancer de buzz axe ", 60, 10, 25f, 3f, "Vous lancez votre buzz axe.", .7f, Action.TYPE_OF_ACTION.dammage, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.projectile);
         A.setProjectilePath("Characters/Psycho/Assets/BuzzAxeNew");
@@ -54,8 +54,9 @@ public class Psycho : Character
         Action Z = new Action("Délire psychodélique", 25, 25, 0f, 15f, "Vous entrez dans une rage qui vous fait oubliez la douleur, vous regagnez 20% de votre santé max et augmenter votre vitesse de 25% pour 5secondes", .1f, Action.TYPE_OF_ACTION.speed_up, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.self);
         Z.setDuree(5);
 
-        Action E = new Action("Roulade", 0, 10, 15f, 5f, "Vous effectuez une roulade.", 1f, Action.TYPE_OF_ACTION.dash, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.dash);
+        Action E = new Action("Roulade", 0, 10, 15f, 5f, "Vous effectuez une roulade.", .8f, Action.TYPE_OF_ACTION.dash, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.dash);
         E.setDashSpeed(20f);
+        E.setDashDuration(.8f);
         #endregion
 
         this.InitialisationAction(AutoAttaque, A, Z, E, null);
@@ -113,11 +114,13 @@ public class Psycho : Character
                         if (A == false && E == false)
                         {
                             //On regarde si l'auto action peut atteindre la cible 
-                            if (Vector3.Distance(this.transform.position, go.transform.position) <= this.getAutoAction().getRange())
+                            if (Vector3.Distance(this.transform.position, go.transform.position) <= this.getAutoAction().getRange() && !cdAuto && TimeAuto <= 0)
                             {
                                 //lancement de l'auto attaque
-                                Attack(character, this.getAutoAction());
-                                AttackAnimation(this.getAutoAction(), anim, "Auto");
+                                LaunchAuto(character);
+
+                                //Attack(character, this.getAutoAction());
+                                //AttackAnimation(this.getAutoAction(), anim, "Auto");
                             }
                         }
                         else
@@ -167,6 +170,14 @@ public class Psycho : Character
        
     }
 
+    public void LaunchAuto(Character cible)
+    {
+        StartCoroutine(StartCoolDownAuto());
+        Attack(cible, this.getAutoAction());
+        AttackAnimation(this.getAutoAction(), this.m_animator, "Auto");
+        if (nav != null)
+            nav.SetDestination(transform.position);
+    }
 
     private void LaunchA(Vector3 destination , Animator anim)
     {

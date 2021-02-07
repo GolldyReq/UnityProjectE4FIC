@@ -13,8 +13,10 @@ public class SelectPlayerButton : MonoBehaviour
         string pathPrefab = "Characters/" + playerName + "/Prefabs/" + playerName;
         Debug.Log("Chargement de : " + pathPrefab);
         GameObject Player = GameObject.Instantiate(Resources.Load(pathPrefab)) as GameObject;
-        Player.name = "Character";
-        Player.transform.parent = GameObject.Find("Player").transform;
+        Player.name = "Player";
+        //Player.transform.parent = GameObject.Find("PlayerSpawn").transform;
+        Player.transform.parent = GameObject.Find("PlayerSpawn").transform.parent.transform;
+        Player.transform.position = GameObject.Find("PlayerSpawn").transform.position;
         Debug.Log("Personnage chargé");
 
         //Instanciatin de la caméra
@@ -32,4 +34,14 @@ public class SelectPlayerButton : MonoBehaviour
         MenuManager.Instance.PlayButtonHasBeenClicked();
 
     }
+
+    public void OnMouseOverEnter()
+    {
+        gameObject.transform.parent.GetChild(0).GetComponent<Image>().color = Color.white;
+    }
+    public void OnMouseOverExit()
+    {
+        gameObject.transform.parent.GetChild(0).GetComponent<Image>().color = Color.gray;
+    }
+
 }
