@@ -56,6 +56,9 @@ public class GameManager : MonoBehaviour
     {
         ChangeState(GAME_STATE.Play);
         GameController.Instance.ChangePhase(GameController.PHASEACTION.PlayerStat);
+        //Desactiver la musique
+        AudioManager.Instance.GetComponent<AudioSource>().Stop();
+
     }
 
 
@@ -65,7 +68,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log("J'appuie la sur le bouton");
         ChangeState(GAME_STATE.SelectionPlayer);
         GameController.Instance.ChangePhase(GameController.PHASEACTION.ChampionSelection);
-        SelectPlayer.CountPlayer();
+        SelectPlayer.CountPlayer(); //Recuperer le nombre de personnage jouable
     }
 
 

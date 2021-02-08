@@ -41,7 +41,7 @@ public class Psycho : Character
 
         #region Action init
         //Chargement des actions
-        Action AutoAttaque = new Action("coup de buzz axe", 35, 0, 10, 1.5f, "Vous infligez un coup avec votre buzz axe.", .7f);
+        Action AutoAttaque = new Action("coup de buzz axe", 35, 0, 10, 1f, "Vous infligez un coup avec votre buzz axe.", .7f);
 
         Action A = new Action("Lancer de buzz axe ", 60, 10, 25f, 3f, "Vous lancez votre buzz axe.", .7f, Action.TYPE_OF_ACTION.dammage, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.projectile);
         A.setProjectilePath("Characters/Psycho/Assets/BuzzAxeNew");

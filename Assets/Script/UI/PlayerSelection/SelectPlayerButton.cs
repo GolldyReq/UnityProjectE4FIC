@@ -19,6 +19,9 @@ public class SelectPlayerButton : MonoBehaviour
         Player.transform.position = GameObject.Find("PlayerSpawn").transform.position;
         Debug.Log("Personnage chargé");
 
+        //Désactiver la caméra du menu
+        GameObject.Find("CameraMenu").SetActive(false);
+
         //Instanciatin de la caméra
         GameObject camera = new GameObject("CameraPlayer");
         camera.AddComponent<Camera>();
