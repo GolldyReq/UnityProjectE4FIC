@@ -17,6 +17,8 @@ public class SelectPlayerButton : MonoBehaviour
         //Player.transform.parent = GameObject.Find("PlayerSpawn").transform;
         Player.transform.parent = GameObject.Find("PlayerSpawn").transform.parent.transform;
         Player.transform.position = GameObject.Find("PlayerSpawn").transform.position;
+        GameController.Instance.m_teamBlue.Add(Player);
+        Player.GetComponent<Character>().getTeam();
         Debug.Log("Personnage chargé");
 
         //Désactiver la caméra du menu

@@ -6,6 +6,8 @@ public class Tower : MonoBehaviour
 {
 
     public int m_pv,m_pv_max;
+    public bool RedTeam;
+    public bool BlueTeam;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +20,12 @@ public class Tower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(m_pv <= 0 )
+        {
+            //Mettre les 2 generateurs de sbire en SerializeField et les detruire
+            Destroy(gameObject);
+            //Reload du nav mesh Surface
+        }
     }
 
     public static void TakeDammage(Tower tour , int dammage)

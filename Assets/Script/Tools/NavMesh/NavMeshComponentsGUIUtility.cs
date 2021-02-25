@@ -31,7 +31,6 @@ namespace UnityEditor.AI
                 else if (areaIndex == areaNames.Length - 1)
                     NavMeshEditorHelpers.OpenAreaSettings();
             }
-
             EditorGUI.EndProperty();
         }
 

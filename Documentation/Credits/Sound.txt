@@ -7,8 +7,8 @@ Effets:
 
 	-https://opengameart.org/content/ui-sound-effects-library
 	-https://opengameart.org/content/interface-sounds-starter-pack
-
-
+	-https://freesound.org/people/thefsoundman/sounds/118513/
+	-https://www.zapsplat.com/
 
 
 https://opengameart.org/

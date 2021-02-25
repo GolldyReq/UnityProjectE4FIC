@@ -55,10 +55,10 @@ public class Ninja : Character
         E.setStartHeightPos(transform.position.y + 5f);
         E.setProjectile(m_fireball);
         E.setReorientation(true);
-        E.setProjectileEffect(Action.ACTION_EFFECT.ignite, 75, 5, 15) ;
+        E.setProjectileEffect(Action.ACTION_EFFECT.ignite, /*75*/99, 5, 15) ;
 
 
-        R = new Action("Teleportation", 0, 100, 50, 75f, "Le ninja disparaît et réapparaît aussitôt comme s'il s'était téléporté ! ", .1f, Action.TYPE_OF_ACTION.dash, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.self); 
+        R = new Action("Teleportation", 0, /*100*/20, 50, 75f, "Le ninja disparaît et réapparaît aussitôt comme s'il s'était téléporté ! ", .1f, Action.TYPE_OF_ACTION.dash, Action.ACTION_EFFECT.none, 0f, Action.ACTION_CIBLE.self); 
         #endregion
         InitialisationAction(Auto, A, Z, E, R);
 

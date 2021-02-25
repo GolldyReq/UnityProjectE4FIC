@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
     public enum PHASEACTION { None, ChampionSelection , PlayerStat }
     public PHASEACTION m_Phase;
     public event Action<PHASEACTION> OnGamePhaseChange;
+    public List<GameObject> m_teamRed;
+    public List<GameObject> m_teamBlue;
 
     public void ChangePhase(PHASEACTION phase)
     {
